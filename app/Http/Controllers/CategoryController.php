@@ -35,7 +35,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi
+        $this->validate($request, [
+            'nm_category' => 'required',
+            'description' => 'required'
+        ]);
+        //simpan data
+        $input = $request->all();
+        $simpan = Category::create($input);
+        //return jsonnya
+        if ($simpan) {
+            return response()->json($simpan);
+        }else{
+            return response()->json([
+                'msg'=>false,
+                'data'=>'NOT FOUND'
+            ]);
+        }
     }
 
     /**

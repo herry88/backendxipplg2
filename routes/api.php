@@ -40,3 +40,8 @@ Route::get(
     'get-category',
     [CategoryController::class, 'index']
 )->name('category.index');
+
+Route::post(
+    'store-category',
+    [CategoryController::class, 'store']
+)->name('category.store');
