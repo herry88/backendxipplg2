@@ -46,10 +46,10 @@ class CategoryController extends Controller
         //return jsonnya
         if ($simpan) {
             return response()->json($simpan);
-        }else{
+        } else {
             return response()->json([
-                'msg'=>false,
-                'data'=>'NOT FOUND'
+                'msg' => false,
+                'data' => 'NOT FOUND'
             ]);
         }
     }
@@ -94,8 +94,21 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        //find ID category
+        $category = Category::find($id);
+        //delete data
+
+        //show message delete data
+        if ($category->delete()) {
+            return response()->json(
+                [
+                    'msg' => 'success', 200
+                ]
+            );
+        } else {
+            return response()->json(['msg' => 'Failed '], 404);
+        }
     }
 }
